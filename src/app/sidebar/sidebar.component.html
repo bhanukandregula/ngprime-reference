@@ -1,0 +1,119 @@
+<div style="background-color: burlywood; width: 1500px; height: 1000px">
+ <br>
+ <br>
+ <br>
+<p-button (click)="showMaximizablebutton()" icon="pi pi-external-link" label="Button" class="p-button-rounded p-button-secondary"></p-button>
+<p-dialog [(visible)]="displayMaximumbutton" [modal]="true" [style]="{width: '50vw'}" [maximizable]="true" [baseZIndex]="10000"
+    [draggable]="false" [resizable]="false">
+    <p><button pButton pRipple type="button" align="center" label="Secondary" class="p-button-secondary"></button></p>
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="displayMaximumbutton=false" label="Close" class="p-button-text"></p-button>
+        </ng-template>
+</p-dialog>
+<br>
+<br>
+<br>
+<p-button (click)="showMaximizableDialog()" icon="pi pi-external-link" label="Menu Bar" class="p-button-rounded p-button-secondary"></p-button>
+<p-dialog [(visible)]="displayMaximizable" [modal]="true" [style]="{width: '75vw'}" [maximizable]="true" [baseZIndex]="10000"
+    [draggable]="false" [resizable]="false">
+    <p><p-menubar [model]="item">
+        <div>
+            <input type="text" pInputText placeholder="Search">
+            <button type="button" pButton label="Logout" icon="pi pi-power-off" style="margin-left:.25em"></button>
+        </div>
+    </p-menubar></p>
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="displayMaximizable=false" label="Close" class="p-button-text"></p-button>
+        </ng-template>
+</p-dialog>
+<br>
+<br>
+<br>
+<p-button (click)="showMaximumFile()" icon="pi pi-external-link" label="File Upload" class="p-button-rounded p-button-secondary"></p-button>
+<p-dialog [(visible)]="displayMaximumFile" [modal]="true" [style]="{width: '50vw'}" [maximizable]="true" [baseZIndex]="10000"
+    [draggable]="false" [resizable]="false">
+    <p><p-fileUpload name="files[]" url="./upload.php" (onUpload)="onUpload($event)"
+        [multiple]="true" accept="image/*" [maxFileSize] ="1000000">
+        <ng-template pTemplate="content">
+            <ul *ngIf="uploadedFiles.length">
+                <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+            </ul>
+        </ng-template>
+</p-fileUpload></p>
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="displayMaximumFile=false" label="Close" class="p-button-text"></p-button>
+        </ng-template>
+</p-dialog>
+<br>
+<br>
+<br>
+<p-button (click)="showMaximizableOverlaybutton()" icon="pi pi-external-link" label="Overlay Panel" class="p-button-rounded p-button-secondary"></p-button>
+<p-dialog [(visible)]="displayMaximumOverlaybutton" [modal]="true" [style]="{width: '50vw'}" [maximizable]="true" [baseZIndex]="10000"
+   [draggable]="false" [resizable]="false">
+   <p><p-toast></p-toast>
+    <p-button label="Select a Product" icon="pi pi-search" (click)="op.toggle($event)"></p-button>
+    <p-overlayPanel #op [showCloseIcon]="true" [style]="{width: '450px'}">
+        <ng-template pTemplate>
+            <p-table [value]="products" selectionMode="single" [(selection)]="selectedProduct" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="5">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="name">Name<p-sortIcon field="name"></p-sortIcon></th>
+                        <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-product>
+                    <tr [pSelectableRow]="rowData">
+                        <td>{{product.name}}</td>
+                        <td>{{product.price}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </ng-template>
+    </p-overlayPanel></p>
+       <ng-template pTemplate="footer">
+           <p-button icon="pi pi-check" (click)="displayMaximumOverlaybutton=false" label="Close" class="p-button-text"></p-button>
+       </ng-template>
+</p-dialog>
+<br>
+<br>
+<br>
+<p-button (click)="showMaximum()" icon="pi pi-external-link" label="Message Service" class="p-button-rounded p-button-secondary"></p-button>
+<p-dialog [(visible)]="displayMaximum" [modal]="true" [style]="{width: '50vw'}" [maximizable]="true" [baseZIndex]="10000"
+    [draggable]="false" [resizable]="false">
+    <p-toast></p-toast>
+    <p-toast position="top-left" key="tl"></p-toast>
+    <p-toast position="top-center" key="tc"></p-toast>
+    <p-toast position="bottom-center" key="bc"></p-toast>
+    
+    <p-toast position="bottom-center" key="c" [baseZIndex]="5000">
+        <ng-template let-message pTemplate="message">
+            <div class="p-flex p-flex-column" style="flex: 1">
+                <div class="p-text-center">
+                    <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
+                    <h4>{{message.summary}}</h4>
+                    <p>{{message.detail}}</p>
+                </div>
+            </div>
+        </ng-template>
+    </p-toast>
+    
+    <div class="card">   <h3>Positions</h3>
+        <button type="button" pButton pRipple (click)="showTopLeft()" label="Top Left"></button>
+        <button type="button" pButton pRipple (click)="showTopCenter()" label="Top Center" class="p-button-warning"></button>
+        <button type="button" pButton pRipple (click)="showBottomCenter()" label="Bottom Center" class="p-button-success"></button></div>
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="displayMaximum=false" label="Close" class="p-button-text"></p-button>
+        </ng-template>
+</p-dialog>
+<br>
+<br>
+<br>
+<!-- <p-button (click)="showMaximizablebutton()" icon="pi pi-external-link" label="Button" class="p-button-rounded p-button-secondary"></p-button>
+<p-dialog [(visible)]="displayMaximumbutton" [modal]="true" [style]="{width: '50vw'}" [maximizable]="true" [baseZIndex]="10000"
+    [draggable]="false" [resizable]="false">
+    <p></p>
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="displayMaximumbutton=false" label="Close" class="p-button-text"></p-button>
+        </ng-template>
+</p-dialog> -->
+</div>
